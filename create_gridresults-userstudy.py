@@ -3,14 +3,14 @@ import os
 # === Parameters ===
 folder = "/Users/anandhu/Documents/proxy/SIGRAPH-ASIA/VRSculpt-Rendering"
 # subfolder = "data/wireframes"
-subfolder = "renders"
+subfolder = "user-study"
 root_folder = os.path.join(folder, subfolder)
-output_svg = os.path.join(folder,subfolder+"_comparsison"".svg")
+output_svg = os.path.join(folder,subfolder+".svg")
 image_width = 300  # width per image in px
 image_height = 300  # height per image in px
 padding = 20
 
-column_names = ["ribbon", "poisson","vipss","ballmerge"]
+column_names = ["ribbon", "final","ribbon-final"]
 
 # === Collect Image Paths ===
 rows = []
@@ -19,18 +19,20 @@ for subfolder in sorted(os.listdir(root_folder)):
     if not os.path.isdir(sub_path):
         continue
 
-    render_path = os.path.join(sub_path, "renders_rotated")
+    render_path = os.path.join(sub_path, "renders")
     if not os.path.exists(render_path):
         continue
-
-    row = []
-    for col in column_names:
-        image_path = os.path.join(render_path, f"render_from_{col}.png")
-        if os.path.exists(image_path):
-            row.append(image_path)
-        else:
-            row.append(None)
-    rows.append((subfolder, row))
+    
+    for sub in sorted(os.listdir(render_path)):
+        row=[]
+        id_path = os.path.join(render_path, sub)
+        for col in column_names:
+            image_path = os.path.join(id_path, f"render_{col}.png")
+            if os.path.exists(image_path):
+                row.append(image_path)
+            else:
+                row.append(None)
+        rows.append((subfolder, row))
 
 # === Build SVG ===
 svg_width = 3 * image_width + 4 * padding

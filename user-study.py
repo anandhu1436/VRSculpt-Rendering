@@ -103,8 +103,8 @@ def create_two_sided_material(name="TwoSidedRibbon", front_color=(0, 0.2, 1, 1),
 
 # === Parameters ===
 
-root_folder = "/Users/anandhu/Documents/proxy/DelaunayBrush/Inputs_and_Results/SKETCHES/comparison"
-imgRes_x, imgRes_y = 1000, 1000
+root_folder = "/Users/anandhu/Documents/proxy/SIGRAPH-ASIA/VRSculpt-Rendering/user-study/Zhonghan"
+imgRes_x, imgRes_y = 3000, 3000
 
 # === Group files by prefix (before first underscore) ===
 
@@ -136,7 +136,7 @@ for group_key, file_list in mesh_groups.items():
         # elif "uniform" in fname_lower:
         #     mesh_paths.append(f_path)
         #     mesh_types.append("uniform")
-        # if "circumspheres.obj" in fname_lower:
+        # elif "circumspheres.obj" in fname_lower:
         #     mesh_paths.append(f_path)
         #     mesh_types.append("spheres")
         if "final" in fname_lower:
@@ -145,18 +145,18 @@ for group_key, file_list in mesh_groups.items():
         elif "strokes" in fname_lower:
             mesh_paths.append(f_path)
             mesh_types.append("ribbon")
-        elif "points.obj" in fname_lower:
-            mesh_paths.append(f_path)
-            mesh_types.append("lines")
-        elif "xyz" in fname_lower:
-            mesh_paths.append(f_path)
-            mesh_types.append("ballmerge")
-        elif "surface" in fname_lower:
-            mesh_paths.append(f_path)
-            mesh_types.append("vipss")
-        elif "poisson" in fname_lower:
-            mesh_paths.append(f_path)
-            mesh_types.append("poisson")
+        # elif "points.obj" in fname_lower:
+        #     mesh_paths.append(f_path)
+        #     mesh_types.append("lines")
+        # elif "xyz" in fname_lower:
+        #     mesh_paths.append(f_path)
+        #     mesh_types.append("ballmerge")
+        # elif "surface" in fname_lower:
+        #     mesh_paths.append(f_path)
+        #     mesh_types.append("vipss")
+        # elif "poisson" in fname_lower:
+        #     mesh_paths.append(f_path)
+        #     mesh_types.append("poisson")
         
 
     if not mesh_paths:
@@ -347,7 +347,7 @@ for group_key, file_list in mesh_groups.items():
     bt.shadowThreshold(alphaThreshold=0.025, interpolationMode='CARDINAL')
 
     # === Render with Camera per Object ===
-    output_dir = os.path.join(os.path.curdir, 'renders', group_key)
+    output_dir = os.path.join(root_folder, 'renders', group_key)
     os.makedirs(output_dir, exist_ok=True)
 
     for i, mesh in enumerate(all_meshes):
@@ -373,8 +373,8 @@ for group_key, file_list in mesh_groups.items():
                 # extra_final_obj.hide_render = True  # Re-hide to be safe
 
         # else:
-        # img_path = os.path.join(output_dir, f"render_{mesh_types[i]}.png")
-        # bt.renderImage(img_path, cam)
+        img_path = os.path.join(output_dir, f"render_{mesh_types[i]}.png")
+        bt.renderImage(img_path, cam)
 
 
     # === Save Blender File ===

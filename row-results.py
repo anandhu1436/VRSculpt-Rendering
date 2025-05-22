@@ -117,7 +117,11 @@ for subfolder in sorted(os.listdir(root_folder)):
         else:
             mesh = bt.readMesh(path, translation, rotation, (1, 1, 1))
             meshColor = bt.colorObj((1.0, 0.55, 0.0, 1), 0.5, 1.0, 1.0, 0.0, 2.0)
-            bt.setMat_plastic(mesh, meshColor)
+            subColor = bt.colorObj((1.0, 0.55, 0.0, 1), 0.5, 2.0, 1.0, 0.0, 1.0)
+            # bt.setMat_plastic(mesh, meshColor)
+            meshC = bt.colorObj(bt.derekBlue, 0.5, 1.0, 1.0, 0.0, 0.0)
+            subC = bt.colorObj(bt.derekBlue, 0.5, 2.0, 1.0, 0.0, 1.0)
+            bt.setMat_ceramic(mesh, meshColor, subC)
             bpy.ops.object.shade_smooth()
             all_meshes.append(mesh)
 
